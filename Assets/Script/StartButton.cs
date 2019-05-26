@@ -23,7 +23,7 @@ public class StartButton : MonoBehaviour
     }
     public void RePlayGame()
     {
-        SceneManager.LoadScene(0);
+        AvatarSys._instance.LoadGame();
     }
     public void ExitGame()
     {
