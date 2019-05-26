@@ -24,6 +24,9 @@ public class StartButton : MonoBehaviour
     public void RePlayGame()
     {
         SceneManager.LoadScene(1);
+
+        AvatarSys._instance.LoadGame();
+
     }
     public void ExitGame()
     {
