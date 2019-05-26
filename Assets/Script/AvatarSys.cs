@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 public class AvatarSys : MonoBehaviour
 {
@@ -202,6 +204,91 @@ public class AvatarSys : MonoBehaviour
 
                 str[i, 1] = number;
             }
+        }
+    }
+
+    private Save CreateSaveGameObject(){
+		Save save = new Save();
+        save.avatar = nowcount;
+        if(nowcount == 0){
+            save.target = girlTarget;
+            save.sourceTrans = girlSourceTrans;
+            save.data = girlData;
+            save.hips = girlHips;
+            save.smr = girlSmr;
+            save.str = girlStr;
+        }
+        else{
+            save.target = boyTarget;
+            save.sourceTrans = boySourceTrans;
+            save.data = boyData;
+            save.hips = boyHips;
+            save.smr = boySmr;
+            save.str = boyStr;
+        }
+        return save;
+	}
+
+    public void SaveGame(){
+        Save save = CreateSaveGameObject();
+
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(Application.persistentDataPath + "/gamesave.save");
+        bf.Serialize(file, save);
+        file.Close();
+
+        Debug.Log("Game Saved");
+    }
+
+    
+    public void LoadGame(){ 
+        if (File.Exists(Application.persistentDataPath + "/gamesave.save"))
+        {
+            
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/gamesave.save", FileMode.Open);
+            Save save = (Save)bf.Deserialize(file);
+            file.Close();
+
+            nowcount = (int)save.avatar;
+            if(nowcount == 0)
+            {
+                girlTarget = save.target;
+                girlSourceTrans = save.sourceTrans;
+                girlData = save.data;
+                girlHips = save.hips;
+                girlSmr = save.smr;
+                girlStr = save.str;
+                boyTarget.SetActive(false);
+                girlTarget.SetActive(true);
+                boyPanal.SetActive(false);
+                girlPanal.SetActive(true);
+                InitAvatarGirl();
+            }
+            else
+            {
+                AvatarSys._instance.boyTarget = save.target;
+                AvatarSys._instance.boySourceTrans = save.sourceTrans;
+                AvatarSys._instance.boyData = save.data;
+                AvatarSys._instance.boyHips = save.hips;
+                AvatarSys._instance.boySmr = save.smr;
+                AvatarSys._instance.boyStr = save.str;
+                AvatarSys._instance.boyTarget.SetActive(true);
+                girlTarget.SetActive(false);
+                boyPanal.SetActive(true);
+                girlPanal.SetActive(false);
+                InitAvatarBoy();
+            }
+
+            boyTarget.AddComponent<SpinWithMouse>();
+            girlTarget.AddComponent<SpinWithMouse>();
+
+            Debug.Log("Game Loaded");
+
+        }
+        else
+        {
+            Debug.Log("No game saved!");
         }
     }
 }
