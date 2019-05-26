@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/comeout.unity
     guid: fc3085afd719a6d49b46b34e74e7c8c9
+  - enabled: 1
+    path: Assets/Scenes/Start.unity
+    guid: 964999e12c2071747a9224c83f534397
   m_configObjects: {}
