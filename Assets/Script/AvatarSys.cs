@@ -176,6 +176,7 @@ public class AvatarSys : MonoBehaviour
         if (nowcount == 0)
         {
             nowcount = 1;
+            Debug.Log(nowcount);
             boyTarget.SetActive(true);
             girlTarget.SetActive(false);
             boyPanal.SetActive(true);
@@ -184,6 +185,7 @@ public class AvatarSys : MonoBehaviour
         else
         {
             nowcount = 0;
+            Debug.Log(nowcount);
             boyTarget.SetActive(false);
             girlTarget.SetActive(true);
             boyPanal.SetActive(false);

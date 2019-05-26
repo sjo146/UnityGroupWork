@@ -44,7 +44,7 @@ public class AvatarButton : MonoBehaviour
     }
     public void loadScenes()
     {
-        SceneManager.LoadScene(1);//1是index
+        SceneManager.LoadScene(2);//1是index
     }
 
 }
