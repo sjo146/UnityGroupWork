@@ -6,6 +6,9 @@ TagManager:
   tags:
   - GlobalUIMusic
   - GlobalLoadingPre
+  - sexPanle
+  - boy
+  - girl
   layers:
   - Default
   - TransparentFX

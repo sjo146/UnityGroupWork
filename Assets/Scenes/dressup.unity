@@ -4383,7 +4383,7 @@ GameObject:
   - component: {fileID: 326512309}
   m_Layer: 5
   m_Name: sexPanle
-  m_TagString: Untagged
+  m_TagString: sexPanle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11672,7 +11672,7 @@ GameObject:
   - component: {fileID: 1075206283}
   m_Layer: 5
   m_Name: girl
-  m_TagString: Untagged
+  m_TagString: girl
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18113,7 +18113,7 @@ GameObject:
   - component: {fileID: 1689515560}
   m_Layer: 5
   m_Name: boy
-  m_TagString: Untagged
+  m_TagString: boy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18368,6 +18368,8 @@ MonoBehaviour:
   nowcount: 0
   girlPanal: {fileID: 1321993512}
   boyPanal: {fileID: 26313825}
+  boytoggle: {fileID: 1689515557}
+  girltoggle: {fileID: 1075206280}
 --- !u!1 &1723869220
 GameObject:
   m_ObjectHideFlags: 0

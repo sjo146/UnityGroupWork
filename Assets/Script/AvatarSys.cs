@@ -4,6 +4,7 @@ using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class AvatarSys : MonoBehaviour
 {
@@ -32,7 +33,11 @@ public class AvatarSys : MonoBehaviour
     public int nowcount = 0; //0 是女孩 1 是男孩
     public GameObject girlPanal;
     public GameObject boyPanal;
-
+    // private GameObject boy;
+    // private GameObject girl;
+    // public GameObject sexPanal;
+    public Toggle boytoggle;
+    public Toggle girltoggle;
     private int replay=2;
 
     public string[,] getGirlStr()
@@ -53,22 +58,36 @@ public class AvatarSys : MonoBehaviour
 
     void Start()
     {
-        
+        // boy = GameObject.FindGameObjectWithTag("boy");
+        // girl = GameObject.FindGameObjectWithTag("girl");
         Debug.Log("开始");
-        GirlAvatar();
-        BoyAvatar();
-        boyTarget.AddComponent<SpinWithMouse>();
-        girlTarget.AddComponent<SpinWithMouse>();
         readReplay();
         if(replay == 1)
         {
             LoadGame();
+            if(this.nowcount == 1)
+            {
+                GirlAvatar();
+                BoyAvatar();
+                boyTarget.AddComponent<SpinWithMouse>();
+                girlTarget.AddComponent<SpinWithMouse>();
+                boyTarget.SetActive(true);
+                girlTarget.SetActive(false); 
+                nowcount = 0;
+                boytoggle.isOn = true;
+            }
         }
-        if(nowcount == 1)
-        {
-            girlTarget.SetActive(false);
+        else{
+            GirlAvatar();
+            BoyAvatar();
+            boyTarget.AddComponent<SpinWithMouse>();
+            girlTarget.AddComponent<SpinWithMouse>();
+            boyTarget.SetActive(false); 
+            girltoggle.isOn = true;
         }
-        boyTarget.SetActive(false); 
+        
+        
+        
         
     }
 
@@ -255,6 +274,8 @@ public class AvatarSys : MonoBehaviour
                 this.boyStr = save.str;
             }
             Debug.Log("Game Loaded");
+            Debug.Log(save.avatar);
+            Debug.Log(nowcount);
 
         }
         else
