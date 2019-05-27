@@ -9,10 +9,12 @@ public class LoadAvatar : MonoBehaviour
     {
         if (AvatarSys._instance.nowcount == 0)
         {
+            Debug.Log("女孩");
             AvatarSys._instance.GirlAvatar();
         }
         else
         {
+            Debug.Log("男孩");
             AvatarSys._instance.BoyAvatar();
         }
     }

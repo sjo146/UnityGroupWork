@@ -35,12 +35,15 @@ public class AvatarSys : MonoBehaviour
 
     void Awake()
     {
+        Debug.Log("唤醒");
         _instance = this;
         DontDestroyOnLoad(this.gameObject);//不删除游戏物体
     }
 
     void Start()
     {
+        
+        Debug.Log("开始");
         GirlAvatar();
         BoyAvatar();
         boyTarget.AddComponent<SpinWithMouse>();
@@ -69,7 +72,6 @@ public class AvatarSys : MonoBehaviour
         girlSourceTrans = go.transform;
         go.SetActive(false);//使得产生的所有资源不显示
         girlTarget = Instantiate(Resources.Load("FemaleTarget")) as GameObject;
-
         girlHips = girlTarget.GetComponentsInChildren<Transform>();
     }
 
@@ -238,7 +240,7 @@ public class AvatarSys : MonoBehaviour
     
     public void LoadGame(){ 
 
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
         if (File.Exists(Application.persistentDataPath + "/gamesave.save"))
         {
             
