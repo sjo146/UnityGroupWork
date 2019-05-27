@@ -33,6 +33,17 @@ public class AvatarSys : MonoBehaviour
     public GameObject girlPanal;
     public GameObject boyPanal;
 
+    private int replay=2;
+
+    public string[,] getGirlStr()
+    {
+        return this.girlStr;
+    }
+    public string[,] getBoyStr()
+    {
+        return this.boyStr;
+    }
+
     void Awake()
     {
         Debug.Log("唤醒");
@@ -48,7 +59,17 @@ public class AvatarSys : MonoBehaviour
         BoyAvatar();
         boyTarget.AddComponent<SpinWithMouse>();
         girlTarget.AddComponent<SpinWithMouse>();
-        boyTarget.SetActive(false);
+        readReplay();
+        if(replay == 1)
+        {
+            LoadGame();
+        }
+        if(nowcount == 1)
+        {
+            girlTarget.SetActive(false);
+        }
+        boyTarget.SetActive(false); 
+        
     }
 
     public void GirlAvatar()
@@ -212,35 +233,10 @@ public class AvatarSys : MonoBehaviour
         }
     }
 
-    private Save CreateSaveGameObject(){
-		Save save = new Save();
-        save.avatar = nowcount;
-        if(nowcount == 0){
-            save.str = girlStr;
-        }
-        else{
-            save.str = boyStr;
-        }
-        return save;
-	}
-
-    public void SaveGame(){
-        Save save = CreateSaveGameObject();
-
-        BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(Application.persistentDataPath + "/gamesave.save");
-        bf.Serialize(file, save);
-        file.Close();
-
-        Debug.Log("Game Saved");
-        Debug.Log(nowcount);
-        Debug.Log(save.avatar);
-    }
-
+    
     
     public void LoadGame(){ 
 
-        SceneManager.LoadScene(1);
         if (File.Exists(Application.persistentDataPath + "/gamesave.save"))
         {
             
@@ -249,14 +245,14 @@ public class AvatarSys : MonoBehaviour
             Save save = (Save)bf.Deserialize(file);
             file.Close();
 
-            nowcount = (int)save.avatar;
-            if(nowcount == 0)
+            this.nowcount = (int)save.avatar;
+            if(this.nowcount == 0)
             {
-                girlStr = save.str;
+                this.girlStr = save.str;
             }
             else
             {
-                boyStr = save.str;
+                this.boyStr = save.str;
             }
             Debug.Log("Game Loaded");
 
@@ -265,6 +261,25 @@ public class AvatarSys : MonoBehaviour
         {
             Debug.Log("No game saved!");
         }
-        Start();
+        
+    }
+
+    public void readReplay()
+    {
+        if (File.Exists(Application.persistentDataPath + "/replayOrNot.save"))
+        {
+            
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/replayOrNot.save", FileMode.Open);
+            this.replay = (int)bf.Deserialize(file);
+            file.Close();
+
+            Debug.Log("play replay:"+replay);
+
+        }
+        else
+        {
+            Debug.Log("play replay fail");
+        }
     }
 }

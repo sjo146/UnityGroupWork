@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 public class StartButton : MonoBehaviour
 {
@@ -13,6 +15,8 @@ public class StartButton : MonoBehaviour
     public GameObject option;
     public GameObject setting;
     public Button back_btn;
+
+    private int replay=0;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,15 +30,14 @@ public class StartButton : MonoBehaviour
 
     public void PlayGame()
     {
+        PlayAndReplay(0);
         SceneManager.LoadScene(1);
         Debug.Log("开始游戏");
     }
     public void RePlayGame()
     {
+        PlayAndReplay(1);
         SceneManager.LoadScene(1);
-
-      
-
     }
     public void ExitGame()
     {
@@ -50,5 +53,17 @@ public class StartButton : MonoBehaviour
     {
         option.SetActive(true);
         setting.SetActive(false);
+    }
+
+    public void PlayAndReplay(int replay)
+    {
+        this.replay = replay;
+
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(Application.persistentDataPath + "/replayOrNot.save");
+        bf.Serialize(file, replay);
+        file.Close();
+
+        Debug.Log("play replay:"+replay);
     }
 }
