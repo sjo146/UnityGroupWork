@@ -76,6 +76,16 @@ public class AvatarSys : MonoBehaviour
                 nowcount = 0;
                 boytoggle.isOn = true;
             }
+            else
+            {
+                GirlAvatar();
+                BoyAvatar();
+                boyTarget.AddComponent<SpinWithMouse>();
+                girlTarget.AddComponent<SpinWithMouse>();
+                girlTarget.SetActive(true);
+                boyTarget.SetActive(false); 
+                girltoggle.isOn = true;
+            }
         }
         else{
             GirlAvatar();
