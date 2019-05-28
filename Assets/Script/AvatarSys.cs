@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class AvatarSys : MonoBehaviour
 {
     public static AvatarSys _instance;
+    public int Score = 0;
 
     private Transform girlSourceTrans;
     private GameObject girlTarget;//骨架物体 换装的人
@@ -258,12 +259,25 @@ public class AvatarSys : MonoBehaviour
             {
 
                 str[i, 1] = number;
+                score(number);
             }
         }
     }
 
-    
-    
+    void score(string num)
+    {
+        switch (num)
+        {
+            case "1": Score += 1; break;
+            case "2": Score += 2; break;
+            case "3": Score += 3; break;
+            case "4": Score += 4; break;
+            case "5": Score += 5; break;
+            case "6": Score += 6; break;
+        }
+    }
+
+
     public void LoadGame(){ 
 
         if (File.Exists(Application.persistentDataPath + "/gamesave.save"))

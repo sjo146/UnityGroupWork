@@ -13,5 +13,8 @@ EditorBuildSettings:
     guid: cac8812198cca0a4691c6c78521ba5b8
   - enabled: 1
     path: Assets/Scenes/comeout.unity
+    guid: 19d97f892b6fe9f4581eab784449327f
+  - enabled: 0
+    path: Assets/__DELETED_GUID_Trash/fc3085afd719a6d49b46b34e74e7c8c9
     guid: fc3085afd719a6d49b46b34e74e7c8c9
   m_configObjects: {}
